@@ -32,6 +32,7 @@ import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;
 import com.ProjetALA.Employer.Employer;
 
+@SuppressWarnings("serial")
 @Entity
 public class Reservation implements Serializable{
 	/* attributs */
