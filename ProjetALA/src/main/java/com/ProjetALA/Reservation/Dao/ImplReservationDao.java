@@ -1,15 +1,22 @@
 package com.ProjetALA.Reservation.Dao;
-
+/*Auteur: Arnaud MARY
+ * nom Projet: ProjetALA
+ *date : 03/05/2016
+ *Package: com.ProjetALA.Reservation.Dao
+ *Class: ImplReservationDao
+ *version:1.0
+ *ref-UML: 8
+ *sprint:1
+ *ref-userStories: 1
+ *Classe implementation DAO de la classe RESERVATION
+ * 
+ * */
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-
-
-
 
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;

@@ -1,5 +1,18 @@
 package com.ProjetALA.Reservation.Metier;
 
+/*Auteur: Arnaud MARY
+ * nom Projet: ProjetALA
+ *date : 03/05/2016
+ *Package: com.ProjetALA.Reservation.Metier
+ *Class: ImplReservationMetier
+ *version:1.0
+ *ref-UML: 8
+ *sprint:1
+ *ref-userStories: 1
+ *Classe d'implémentation Metier de Reservation
+ * 
+ * */
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

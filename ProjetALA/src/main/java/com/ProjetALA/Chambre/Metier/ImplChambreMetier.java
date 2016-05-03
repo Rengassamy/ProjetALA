@@ -1,5 +1,16 @@
 package com.ProjetALA.Chambre.Metier;
-
+/*Auteur: Arnaud MARY
+ * nom Projet: ProjetALA
+ *date : 03/05/2016
+ *Package: com.ProjetALA.Chambre.Metier
+ *Class: ImplChambreMetier
+ *version:1.0
+ *ref-UML: 5
+ *sprint:1
+ *ref-userStories: 1
+ *Classe d'implémentation Metier de Chambre
+ * 
+ * */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

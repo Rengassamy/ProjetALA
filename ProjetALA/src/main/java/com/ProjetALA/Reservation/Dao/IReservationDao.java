@@ -1,5 +1,16 @@
 package com.ProjetALA.Reservation.Dao;
-
+/*Auteur: Arnaud MARY
+ * nom Projet: ProjetALA
+ *date : 03/05/2016
+ *Package: com.ProjetALA.Reservation.Dao
+ *Class: IReservationDao
+ *version:1.0
+ *ref-UML: 8
+ *sprint:1
+ *ref-userStories: 1
+ *INTERFACE DAO de la classe RESERVATION
+ * 
+ * */
 import java.util.ArrayList;
 import java.util.List;
 
