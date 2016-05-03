@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.ProjetALA.Reservation.Reservation;
 
 /*Auteur: Arnaud MARY
@@ -33,8 +35,10 @@ public class Chambre implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idChambre;
+	@NotEmpty
+	private String numchambre;
 	@NotNull
-	private Integer capacité;
+	private Integer capacite;
 	@NotNull
 	private Double prix;
 	@NotNull
@@ -51,11 +55,17 @@ public class Chambre implements Serializable{
 	public void setIdChambre(Long idChambre) {
 		this.idChambre = idChambre;
 	}
-	public Integer getCapacité() {
-		return capacité;
+	public String getNumchambre() {
+		return numchambre;
 	}
-	public void setCapacité(Integer capacité) {
-		this.capacité = capacité;
+	public void setNumchambre(String numchambre) {
+		this.numchambre = numchambre;
+	}
+	public Integer getCapacite() {
+		return capacite;
+	}
+	public void setCapacite(Integer capacite) {
+		this.capacite = capacite;
 	}
 	public Double getPrix() {
 		return prix;
@@ -77,11 +87,14 @@ public class Chambre implements Serializable{
 	}
 
 	// Constructeurs : avec paramètres et par défaut
-	public Chambre(Integer capacité, Double prix, String description) {
-		this.capacité = capacité;
+	public Chambre(String numchambre, Integer capacite, Double prix,
+			String description) {
+		this.numchambre = numchambre;
+		this.capacite = capacite;
 		this.prix = prix;
 		this.description = description;
 	}
+
 	public Chambre() {
 	}
 }

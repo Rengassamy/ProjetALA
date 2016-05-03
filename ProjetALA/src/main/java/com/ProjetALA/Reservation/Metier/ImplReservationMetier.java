@@ -1,41 +1,73 @@
 package com.ProjetALA.Reservation.Metier;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Reservation.Reservation;
+import com.ProjetALA.Reservation.Dao.IReservationDao;
 @Transactional
 public class ImplReservationMetier implements IReservationMetier {
-
-	@Override
-	public Reservation addReservation(Reservation r) {
-		// TODO Auto-generated method stub
-		return null;
+	@PersistenceContext
+	private EntityManager em;
+	
+	private Logger log = Logger.getLogger("ImplReservationMetier");
+	
+	// DAO Reservation : declaration + seter
+	private IReservationDao daoresa;
+	
+	public void setDaoresa(IReservationDao daoresa) {
+		this.daoresa = daoresa;
+		log.info("Dao Reservation injected");
 	}
 
+	@Override
+	public Reservation addReservation(Reservation r, Long idClient,
+			Long idEmploye, ArrayList<Chambre> listChambre) {
+		daoresa.addReservation(r, idClient, idEmploye, listChambre);
+		return r;
+	}
+	
 	@Override
 	public Reservation mergeReservation(Long idReservation) {
-		// TODO Auto-generated method stub
-		return null;
+		return daoresa.mergeReservation(idReservation);
 	}
 
 	@Override
-	public Reservation deleteReservation(Long idReservation) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteReservation(Long idReservation) {
+		daoresa.deleteReservation(idReservation);
 	}
 
 	@Override
 	public Reservation getReservation(Long idReservation) {
-		// TODO Auto-generated method stub
-		return null;
+		return daoresa.getReservation(idReservation);
 	}
 
 	@Override
 	public List<Reservation> getListReservation() {
-		// TODO Auto-generated method stub
-		return null;
+		return daoresa.getListReservation();
+	}
+
+	@Override
+	public List<Reservation> getListReservationChambre(Long idChambre) {
+		return daoresa.getListReservationChambre(idChambre);
+	}
+
+	@Override
+	public List<Reservation> getListReservationClient(Long idClient) {
+		return daoresa.getListReservationClient(idClient);
+	}
+
+	@Override
+	public List<Reservation> getListReservationEmploye(Long idEmploye) {
+		return daoresa.getListReservationEmploye(idEmploye);
 	}
 
 }

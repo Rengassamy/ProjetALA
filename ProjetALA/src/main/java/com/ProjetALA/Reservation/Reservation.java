@@ -13,8 +13,8 @@ package com.ProjetALA.Reservation;
  * 
  * */
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,10 +28,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import Client.Client;
-import Employer.Employer;
-
 import com.ProjetALA.Chambre.Chambre;
+import com.ProjetALA.Client.Client;
+import com.ProjetALA.Employer.Employer;
 
 @Entity
 public class Reservation implements Serializable{
