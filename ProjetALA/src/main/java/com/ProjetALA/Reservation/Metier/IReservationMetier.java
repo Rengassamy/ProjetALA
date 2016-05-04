@@ -19,7 +19,7 @@ import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Reservation.Reservation;
 
 public interface IReservationMetier {
-	public Reservation addReservation(Reservation r, Long idClient, Long idEmploye, ArrayList<Chambre> listChambre);
+	public Reservation addReservation(Reservation r, Long idClient, Long idEmploye, List<Chambre> tabC);
 	public Reservation mergeReservation(Long idReservation);
 	public void deleteReservation(Long idReservation);
 	public Reservation getReservation(Long idReservation);

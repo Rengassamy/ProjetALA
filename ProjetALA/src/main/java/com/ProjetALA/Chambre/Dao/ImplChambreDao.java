@@ -26,7 +26,8 @@ public class ImplChambreDao implements IChambreDAO {
 
 	@Override
 	public void deleteChambre(Long idChambre) {
-		em.remove(idChambre);
+		Chambre c = em.find(Chambre.class, idChambre);
+		em.remove(c);
 	}
 
 	@Override

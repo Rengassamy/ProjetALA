@@ -39,24 +39,24 @@ public class Reservation implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idReservation;
-	@NotNull
+//	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date datedebut;
-	@NotNull
+//	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date datefin;
-	@NotNull
+//	@NotNull
 	private String etatresa;
 	/*association avec client */
-	@NotNull
+//	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Client client;
 	/* association avec chambre */
-	@NotNull
+//	@NotNull
 	@ManyToMany(mappedBy="listresa",fetch=FetchType.LAZY)
 	private List<Chambre> listchambre = new ArrayList<Chambre>();
 	/* association avec Employe */
-	@NotNull
+//	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Employer employe;
 	
@@ -97,14 +97,13 @@ public class Reservation implements Serializable{
 	public void setListchambre(List<Chambre> listchambre) {
 		this.listchambre = listchambre;
 	}
-	
+		
 	public Employer getEmploye() {
 		return employe;
 	}
 	public void setEmploye(Employer employe) {
 		this.employe = employe;
 	}
-	
 	/* constructeurs : avec paramètres et par défaut */
 	public Reservation(Date datedebut, Date datefin, String etatresa) {
 		this.datedebut = datedebut;

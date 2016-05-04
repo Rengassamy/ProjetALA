@@ -21,6 +21,7 @@ import javax.persistence.Query;
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;
 import com.ProjetALA.Employer.Employer;
+import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
 
 public class ImplReservationDao implements IReservationDao {
@@ -30,24 +31,26 @@ public class ImplReservationDao implements IReservationDao {
 	
 	@Override
 	public Reservation addReservation(Reservation r, Long idClient,
-			Long idEmploye, ArrayList<Chambre> listChambre) {
+			Long idEmploye, List<Chambre> listChambre) {
 		// on récupère le client à partir de son id pour l'association
-		Client cl = em.find(Client.class, idClient);
+		Client c = em.find(Client.class, idClient);
 		// on récupère l'employé à partir de son id pour l'association
 		Employer e = em.find(Employer.class, idEmploye);
 		// Association avec client
-		r.setClient(cl);
-		cl.getTabReservation().add(r);
+		r.setClient(c);
 		// Association avec employer
 		r.setEmploye(e);
-		e.getTabReservation().add(r);
 		// Association avec chambre
-		for (Chambre c : listChambre) {
-			r.getListchambre().add(c);
-			c.getListresa().add(r);
+		for (Chambre ch : listChambre) {
+			r.getListchambre().add(ch);
 		}
 		// on ajoute l'objet reservation à la base de données
 		em.persist(r);
+		e.getTabReservation().add(r);
+		c.getTabReservation().add(r);
+		for (Chambre cha : listChambre) {
+			cha.getListresa().add(r);
+		}
 		return r;
 	}
 	@Override
@@ -58,7 +61,8 @@ public class ImplReservationDao implements IReservationDao {
 
 	@Override
 	public void deleteReservation(Long idReservation) {
-		em.remove(idReservation);
+		Reservation r = em.find(Reservation.class, idReservation);
+		em.remove(r);
 	}
 
 	@Override
@@ -79,12 +83,12 @@ public class ImplReservationDao implements IReservationDao {
 	}
 	@Override
 	public List<Reservation> getListReservationClient(Long idClient) {
-		Query query = em.createQuery("Select e from Reservation r where r.Client ="+idClient);
+		Query query = em.createQuery("Select r from Reservation r where r.client ="+idClient);
 		return query.getResultList();
 	}
 	@Override
 	public List<Reservation> getListReservationEmploye(Long idEmploye) {
-		Query query = em.createQuery("Select r from Reservation r where r.Employe = "+idEmploye);
+		Query query = em.createQuery("Select r from Reservation r where r.employe = "+idEmploye);
 		return query.getResultList();
 	}
 

@@ -43,7 +43,7 @@ public class ImplReservationMetier implements IReservationMetier {
 
 	@Override
 	public Reservation addReservation(Reservation r, Long idClient,
-			Long idEmploye, ArrayList<Chambre> listChambre) {
+			Long idEmploye, List<Chambre> listChambre) {
 		daoresa.addReservation(r, idClient, idEmploye, listChambre);
 		return r;
 	}
