@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +25,6 @@ import com.ProjetALA.Reservation.Reservation;
 @Transactional
 public class ImplChambreMetier implements IChambreMetier {
 
-	@PersistenceContext
-	private EntityManager em;
 	
 	private final Logger LOG=Logger.getLogger("ImplChambreMetier");
 	// DAO Chambre : declaration + setter
@@ -68,26 +63,31 @@ public class ImplChambreMetier implements IChambreMetier {
 
 	@Override
 	public List<Chambre> getdispo(Date deb, Date fin, Integer nbrepers) throws Exception{
-	/*	List<Chambre> listchambreokcapa = new ArrayList<Chambre>();
-		List<Chambre> listchambreokdate = new ArrayList<Chambre>();
+		if (deb.getTime()>fin.getTime()) throw new Exception("La date de fin doit être supérieure à la date de début");
+		List<Chambre> listchambreok = new ArrayList<Chambre>();
 		
-		for (Chambre c : daochambre.getListChambre()) {
-			if (c.getCapacite()>= nbrepers){
-				listchambreokcapa.add(c);
-			}
-		}
-		if (listchambreokcapa.size()==0){
-			throw new Exception("Il n'existe aucune chambre avec la capacité demandée");
-		}
-		for (Chambre ch : listchambreokcapa) {
+		for (Chambre ch : daochambre.getListChambre()) {
+			String Chevauchement ="Non";
 			for (Reservation	r : ch.getListresa()) {
-				if (r.getDatefin().getTime() < fin.getTime() || r.getDatedebut().getTime() > deb.getTime()){
-					
+				if ((r.getDatedebut().getTime() < deb.getTime() && r.getDatefin().getTime()> deb.getTime())
+						|| (r.getDatedebut().getTime() <fin.getTime() && r.getDatefin().getTime()>fin.getTime())){
+						Chevauchement = "Oui";
+						break;
 				}
 			}
-			listchambreokdate.add(ch);
-		} */
-		return null;
+			if (Chevauchement == "Non"){
+			listchambreok.add(ch);
+			}
+		} 
+		
+		Integer capacitehotel = 0;
+		for (Chambre c : listchambreok) {
+			capacitehotel = capacitehotel + c.getCapacite();
+		}
+		if (capacitehotel < nbrepers){
+			throw new Exception("L'hotel ne peut accueillir le nombre de personnes demandé");
+		}
+		return listchambreok;
 	}
 
 }

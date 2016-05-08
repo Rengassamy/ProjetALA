@@ -18,12 +18,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;
 import com.ProjetALA.Employer.Employer;
 import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
-
+@Transactional
 public class ImplReservationDao implements IReservationDao {
 	
 	@PersistenceContext

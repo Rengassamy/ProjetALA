@@ -18,16 +18,16 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Brand</a>
+				<a class="navbar-brand" href="home">Hotel ALA</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Reservation<span
-							class="sr-only">(current)</span></a></li>
-					<li><a href="#">Facture</a></li>
+					<li><a href="GestionReservation">Reservation</a></li>
+					<li><a href="GestionChambre">Chambre</a></li>
+					<li><a href="GestionFacture">Facture</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Personne <span class="caret"></span></a>
@@ -55,7 +55,11 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-
+	<div class="page-header">
+		<h1>
+			Welcome to Hotel ALA <small>Where happiness exists</small>
+		</h1>
+	</div>
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel">
 		<!-- Indicators -->

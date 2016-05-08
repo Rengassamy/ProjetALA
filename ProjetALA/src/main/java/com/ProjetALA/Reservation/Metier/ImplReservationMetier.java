@@ -13,13 +13,9 @@ package com.ProjetALA.Reservation.Metier;
  * 
  * */
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +24,6 @@ import com.ProjetALA.Reservation.Reservation;
 import com.ProjetALA.Reservation.Dao.IReservationDao;
 @Transactional
 public class ImplReservationMetier implements IReservationMetier {
-	@PersistenceContext
-	private EntityManager em;
 	
 	private Logger log = Logger.getLogger("ImplReservationMetier");
 	

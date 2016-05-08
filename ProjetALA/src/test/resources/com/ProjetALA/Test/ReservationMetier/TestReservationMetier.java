@@ -39,7 +39,6 @@ public class TestReservationMetier {
 		Chambre c = new Chambre("124", 4, 15.1, "Chambre double king size avec vue sur poubelles");
 		List<Chambre> tabC = new ArrayList<Chambre>();
 		tabC.add(c);
-	//	Employer e = new Employer("Test", "Prenom", "M", new Date(), "Toulouse", "123456789", "a@a.fr");
 		ReservationMetier.addReservation(r, 1L, 2L, tabC);
 		assertNotNull(r.getIdReservation());
 	}

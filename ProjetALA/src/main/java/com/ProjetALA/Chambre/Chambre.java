@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ProjetALA.Reservation.Reservation;
@@ -35,18 +37,21 @@ public class Chambre implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idChambre;
-	@NotEmpty
+	@NotBlank
 	private String numchambre;
 	@NotNull
 	private Integer capacite;
 	@NotNull
 	private Double prix;
-	@NotNull
+	@NotBlank
 	private String description;
 	//Association avec Chambre
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="chambre_resa")
 	private List<Reservation> listresa = new ArrayList<Reservation>();
+	//Pour les exceptions
+	@Transient
+	private String exception;
 	
 	//Getter and setters
 	public Long getIdChambre() {
@@ -86,6 +91,12 @@ public class Chambre implements Serializable{
 		this.listresa = listresa;
 	}
 
+	public String getException() {
+		return exception;
+	}
+	public void setException(String exception) {
+		this.exception = exception;
+	}
 	// Constructeurs : avec paramètres et par défaut
 	public Chambre(String numchambre, Integer capacite, Double prix,
 			String description) {

@@ -6,8 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.ProjetALA.Chambre.Chambre;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.ProjetALA.Chambre.Chambre;
+@Transactional
 public class ImplChambreDao implements IChambreDAO {
 	@PersistenceContext
 	private EntityManager em;

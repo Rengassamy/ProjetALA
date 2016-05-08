@@ -26,6 +26,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ProjetALA.Chambre.Chambre;
@@ -40,24 +41,21 @@ public class Reservation implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idReservation;
 //	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date datedebut;
 //	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date datefin;
 //	@NotNull
 	private String etatresa;
 	/*association avec client */
-//	@NotNull
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Client client;
 	/* association avec chambre */
-//	@NotNull
-	@ManyToMany(mappedBy="listresa",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="listresa",fetch=FetchType.EAGER)
 	private List<Chambre> listchambre = new ArrayList<Chambre>();
 	/* association avec Employe */
-//	@NotNull
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Employer employe;
 	
 	/* getter et setters */
