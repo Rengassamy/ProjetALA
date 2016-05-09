@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Chambre.Metier.IChambreMetier;
+import com.ProjetALA.Client.Client;
 import com.ProjetALA.Client.Metier.InterfClientMetier;
+import com.ProjetALA.Employer.Employer;
 import com.ProjetALA.Employer.Metier.InterfEmployerMetier;
 import com.ProjetALA.Reservation.Reservation;
 import com.ProjetALA.Reservation.Metier.IReservationMetier;
+
+
 
 /**
  * Handles requests for the application home page.
@@ -70,10 +74,19 @@ public class HomeController {
         model.addAttribute("EntityEmploye", EmployeMetier.getListofEmployer());
 		return "Reservation";
 	}
-	/*Affichage des réservations appartenant à un client */
+	/*Affichage des réservations faite par un employe */
 	@RequestMapping(value = "/getresabyemploye", method = RequestMethod.GET)
 	public String resabyemploye(Model model, Long idEmploye) {
         model.addAttribute("EntityReservationbyEmp", ReservationMetier.getListReservationEmploye(idEmploye));
+        model.addAttribute("EntityReservation", ReservationMetier.getListReservation());
+        model.addAttribute("EntityClient", ClientMetier.getListofClient());
+        model.addAttribute("EntityEmploye", EmployeMetier.getListofEmployer());
+		return "Reservation";
+	}
+	/*Affichage des réservations d'une chambre */
+	@RequestMapping(value = "/getresabychambre", method = RequestMethod.GET)
+	public String resabychambre(Model model, Long idChambre) {
+        model.addAttribute("EntityReservationbyCha", ReservationMetier.getListReservationChambre(idChambre));
         model.addAttribute("EntityReservation", ReservationMetier.getListReservation());
         model.addAttribute("EntityClient", ClientMetier.getListofClient());
         model.addAttribute("EntityEmploye", EmployeMetier.getListofEmployer());
@@ -84,6 +97,7 @@ public class HomeController {
 	public String addreservation(@ModelAttribute("model") @Valid Reservation r, Long idClient, Long idEmploye,
 			Long idChambre, BindingResult resultat){
 		if (resultat.hasErrors()){
+			
 			return "redirect:GestionReservation";
 		}
 		Chambre c = ChambreMetier.getChambre(idChambre);
@@ -128,15 +142,18 @@ public class HomeController {
 	}
 	/* Recherche de la disponibilité d'une chambre */
 	@RequestMapping(value="/getdispochambre", method= RequestMethod.GET)
-	public String getdispochambre(Model model, Date deb, Date fin, Integer nbrepers){
+	public String getdispochambre(Model model, Date datedeb, Date datefin, Integer nbrepers){
 		try {
-			model.addAttribute("DispoChambre", ChambreMetier.getdispo(deb, fin, nbrepers));
+/*		   SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
+			Date Ddeb = sf.parse(datedeb);
+			Date Dfin = sf.parse(datefin);*/
+			model.addAttribute("DispoChambre", ChambreMetier.getdispo(datedeb, datefin, nbrepers));
 		} catch (Exception e) {
 			Chambre C = new Chambre();
 			C.setException(e.getMessage());
 			model.addAttribute("exc", C);
 		}
-		return "Chambre";
+		return "redirect:GestionChambre";
 	}
 	/* Partie Facture */
 	@RequestMapping(value = "/GestionFacture", method = RequestMethod.GET)
@@ -145,4 +162,65 @@ public class HomeController {
 		return "Facture";
 	}
 	
+	
+	/************************************** Partie Client ****************************************/
+	/************************************** Partie Client ****************************************/
+	/************************************** Partie Client ****************************************/
+	
+	@RequestMapping(value = "/GestionClient", method = RequestMethod.GET)
+	/* Affichage des clients */
+	public String homeClient(Model model) {
+        model.addAttribute("EntityClient", ClientMetier.getListofClient());
+        model.addAttribute("EntityEmployer", EmployeMetier.getListofEmployer());
+        model.addAttribute("model", new Client());
+		return "Client";
+	}
+	/* ajout d'un client */
+	@RequestMapping(value = "/insertclient", method = RequestMethod.GET)
+	public String insertclient (@ModelAttribute("model") @Valid Client c, BindingResult resultat) {
+		if(resultat.hasErrors()){
+			return "errorClient";
+		}
+		ClientMetier.AjouterClient(c);
+	 	ClientMetier.getListofClient();
+		return "redirect:GestionClient";
+	}
+	/* Suppression d'un client */
+	@RequestMapping(value="/deleteclient", method = RequestMethod.GET)
+	public String deleteclient(Model model, Long idClient){
+		ClientMetier.deleteClient(idClient);
+		model.addAttribute("EntityClient", ClientMetier.getListofClient());
+		return "redirect:GestionClient";
+	}
+	
+	
+	/************************************** Partie Employer ****************************************/
+	/************************************** Partie Employer ****************************************/
+	/************************************** Partie Employer ****************************************/
+	
+	@RequestMapping(value = "/GestionEmployer", method = RequestMethod.GET)
+	/* Affichage des employer */
+	public String homeEmployer(Model model) {
+        model.addAttribute("EntityReservation", ReservationMetier.getListReservation());
+        model.addAttribute("EntityChambre", ChambreMetier.getListChambre());
+        model.addAttribute("EntityClient", ClientMetier.getListofClient());
+        model.addAttribute("EntityEmployer", EmployeMetier.getListofEmployer());
+        model.addAttribute("model", new Employer());
+		return "Client";
+	}
+	/* ajout d'un employer */
+	@RequestMapping(value = "/insertemployer", method = RequestMethod.GET)
+	public String insertemployer (Model model, Employer e) {
+		EmployeMetier.AddEmployer(e);
+	 	model.addAttribute("EntityEmployer",EmployeMetier.getListofEmployer());
+		return "redirect:GestionEmployer";
+	}
+	/* Suppression d'un employer */
+	@RequestMapping(value="/deleteemployer", method = RequestMethod.GET)
+	public String deleteemployer(Model model, Long idEmployer){
+		EmployeMetier.deleteEmployer(idEmployer);
+		model.addAttribute("EntityEmployer", EmployeMetier.getListofEmployer());
+		return "redirect:GestionEmployer";
+	}
+
 }
