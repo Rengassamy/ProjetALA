@@ -14,6 +14,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*Auteur:Rengassamy Alex
  * nom Projet :ProjetALA
  *date:02/05/2016
@@ -34,7 +36,7 @@ public class Personne implements Serializable {
 	private String nomPersonne;
 	private String prenom;
 	private String sex;
-	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateNaissance;
 	private String adresse;
 	private String tel;
