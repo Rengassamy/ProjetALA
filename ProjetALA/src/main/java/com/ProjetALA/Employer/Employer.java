@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /*Auteur:Rengassamy Alex
  * nom Projet :ProjetALA
@@ -31,11 +33,11 @@ public class Employer extends Personne {
 	
 
 	/******** getterETsetter *********************/
-
+	@JsonIgnore
 	public List<Reservation> getTabReservation() {
 		return tabReservation;
 	}
-
+	@JsonSetter
 	public void setTabReservation(List<Reservation> tabReservation) {
 		this.tabReservation = tabReservation;
 	}

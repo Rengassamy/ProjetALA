@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import com.ProjetALA.Devis.entity.Devis;
 import com.ProjetALA.Produit.entity.Produit;
-import com.ProjetALA.Reservation.Reservation;
 
 public class ImplDAOProduit implements InterDAOProduit{
 	
@@ -18,9 +17,10 @@ public class ImplDAOProduit implements InterDAOProduit{
 	@Override
 	public Produit addProduit(Produit p,Long idDevis) {
 		// TODO Auto-generated method stub
+		em.persist(p);
 		Devis d = em.find(Devis.class, idDevis);
 		d.getListProduit().add(p);
-		em.persist(p);
+		
 		
 		return p;
 	}
@@ -28,8 +28,15 @@ public class ImplDAOProduit implements InterDAOProduit{
 	@Override
 	public void deleteProduit(Long idProduit) {
 		// TODO Auto-generated method stub
-		Produit p = em.find(Produit.class, idProduit);
+				
+	/*	Produit p = em.find(Produit.class, idProduit);		
+		em.remove(p);*/
+		Query p = (Query) em.createQuery("Select d.listProduit from Devis d where d.listProduit.idProduit =:x");
+		p.setParameter("x",idProduit);
 		em.remove(p);
+		
+		
+		
 	}
 
 	@Override

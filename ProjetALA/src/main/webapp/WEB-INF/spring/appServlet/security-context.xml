@@ -10,14 +10,14 @@
     <http pattern="/resources/**" security="none"/>
 
 
-<http pattern="/Login" security="none"></http>
+<!-- <http pattern="/Login" security="none"></http>
   
 	 <http auto-config="true">
 		<intercept-url pattern="/**" access="ROLE_ADMIN" />
 		<form-login login-page="/Login"  default-target-url="/" authentication-failure-url="/Login?error=true" />
 		
 		<form-login default-target-url="/" login-page="/Login" authentication-failure-url="/Login"/>
-		 <!-- <logout logout-url="/j_spring_security_logout" logout-success-url="/Login"/>  -->
+		 <logout logout-url="/j_spring_security_logout" logout-success-url="/Login"/> 
 	</http>
 	<beans:import resource="servlet-context.xml"/>
 	<authentication-manager>
@@ -29,5 +29,5 @@
              authorities="ROLE_ADMIN"/>
 			</user-service>
 		</authentication-provider>
-	</authentication-manager>
-</beans:beans>
+	</authentication-manager>-->
+</beans:beans> 

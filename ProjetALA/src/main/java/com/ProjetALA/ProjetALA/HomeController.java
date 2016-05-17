@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Chambre.Metier.IChambreMetier;
-import com.ProjetALA.Client.Client;
 import com.ProjetALA.Client.Metier.InterfClientMetier;
-import com.ProjetALA.Employer.Employer;
+import com.ProjetALA.Devis.Metier.InterMetierDevis;
+import com.ProjetALA.Devis.entity.Devis;
 import com.ProjetALA.Employer.Metier.InterfEmployerMetier;
+import com.ProjetALA.Facture.Metier.InterMetierFacture;
+import com.ProjetALA.Facture.entity.Facture;
+import com.ProjetALA.Produit.Metier.InterMetierProduit;
+import com.ProjetALA.Produit.entity.Produit;
 import com.ProjetALA.Reservation.Reservation;
 import com.ProjetALA.Reservation.Metier.IReservationMetier;
+import com.ProjetALA.Employer.Employer;
+import com.ProjetALA.Client.Client;
 
 
 
@@ -41,6 +47,12 @@ public class HomeController {
 	private InterfClientMetier ClientMetier;
 	@Autowired 
 	private InterfEmployerMetier EmployeMetier;
+	@Autowired
+	private InterMetierDevis DevisMetier;
+	@Autowired
+	private InterMetierFacture FactureMetier;
+	@Autowired
+	private InterMetierProduit ProduitMetier;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -155,12 +167,6 @@ public class HomeController {
 		}
 		return "GestionChambre";
 	}
-	/* Partie Facture */
-	@RequestMapping(value = "/GestionFacture", method = RequestMethod.GET)
-	public String homefacture(Model model) {
-		
-		return "Facture";
-	}
 	
 	
 	/************************************** Partie Client ****************************************/
@@ -223,21 +229,121 @@ public class HomeController {
 		return "redirect:GestionEmployer";
 	}
 
+	/************************************** Partie Produit ****************************************/
+	/************************************** Partie Produit ****************************************/
+	/************************************** Partie Produit ****************************************/
+	/* affichage de la liste des produits */
+	@RequestMapping(value = "/GestionProduit", method = RequestMethod.GET)
+	public String homeproduit(Model model) {
+		
+	 	model.addAttribute("EntityProduit", ProduitMetier.getListProduit());
+	 	model.addAttribute("EntityDevis",DevisMetier.getListDevis());
+	 	model.addAttribute("model", new Produit());
+		return "Produit";
+	}
+	
+	/* ajout d'un produit */
+	@RequestMapping(value = "/insertproduit", method = RequestMethod.GET)
+	public String insertproduit(@ModelAttribute("model") @Valid Produit p,long idDevis, BindingResult resultat) {
+		if(resultat.hasErrors()){
+			return "redirect:GestionProduit";
+		}
+		ProduitMetier.addProduit(p,idDevis);
+		ProduitMetier.getListProduit();
+		
+		return "popup_produit";
+	}
+	/* Suppression d'un produit */
+	@RequestMapping(value="/deleteproduit", method = RequestMethod.GET)
+	public String deleteproduit(Model model, Long idProduit){
+		ProduitMetier.deleteProduit(idProduit);
+		model.addAttribute("EntityProduit", ProduitMetier.getListProduit());
+		return "redirect:GestionProduit";
+	}
+	
+	/* Modification d'un produit */
+	@RequestMapping(value = "/mergeproduit", method = RequestMethod.GET)
+	public String mergeproduit(@ModelAttribute("model") @Valid long idProduit, BindingResult resultat) {
+		if(resultat.hasErrors()){
+			return "redirect:GestionProduit";
+		}
+		ProduitMetier.mergeProduit(idProduit);
+		ProduitMetier.getListProduit();
+		
+		return "redirect:GestionProduit";
+	}
+
+	/************************************** Partie Devis ****************************************/
+	/************************************** Partie Devis ****************************************/
+	/************************************** Partie Devis ****************************************/
+	/* affichage de la liste des Devis */
+	@RequestMapping(value = "/GestionDevis", method = RequestMethod.GET)
+	public String homeDevis(Model model) {
+	 	model.addAttribute("EntityDevis", DevisMetier.getListDevis());
+	 	model.addAttribute("EntityReservation", ReservationMetier.getListReservation());
+	 	model.addAttribute("model", new Devis());
+		return "Devis";
+	}
+	
+	/* ajout d'un Devis */
+	@RequestMapping(value = "/insertDevis", method = RequestMethod.GET)
+	public String insertDevis(@ModelAttribute("model") @Valid Long idReservation, BindingResult resultat) {
+		if(resultat.hasErrors()){
+			return "Devis";
+		}
+		Devis d = new Devis();
+		DevisMetier.addDevis(d, idReservation);
+		DevisMetier.getListDevis();
+		return "Devis";
+	}
+	/* Suppression d'un devis */
+	@RequestMapping(value="/deleteDevis", method = RequestMethod.GET)
+	public String deleteDevis(Model model, Long idDevis){
+		DevisMetier.deleteDevis(idDevis);
+		model.addAttribute("EntityDevis", DevisMetier.getListDevis());
+		return "Devis";
+	}
+	/************************************** Partie Facture ****************************************/
+	/************************************** Partie Facture ****************************************/
+	/************************************** Partie Facture ****************************************/
+	/* affichage de la liste des Factures */
+	@RequestMapping(value = "/GestionFacture", method = RequestMethod.GET)
+	public String homeFacture(Model model) {
+	 	model.addAttribute("EntityFacture", FactureMetier.getListFacture());
+	 	model.addAttribute("model", new Facture());
+		return "Devis";
+	}
+	
+	/* ajout d'un Facture */
+	@RequestMapping(value = "/insertFacture", method = RequestMethod.GET)
+	public String insertFacture(@ModelAttribute("model") @Valid Facture f, Long idDevis, BindingResult resultat) {
+		if(resultat.hasErrors()){
+			return "Devis";
+		}
+		
+		FactureMetier.addFacture(f, idDevis);
+		FactureMetier.getListFacture();
+		return "Devis";
+	}
+	/* Suppression d'une Facture */
+	@RequestMapping(value="/deleteFacture", method = RequestMethod.GET)
+	public String deleteFacture(Model model, Long idFacture){
+		FactureMetier.deleteFacture(idFacture);
+		model.addAttribute("EntityFacture", FactureMetier.getListFacture());
+		return "Devis";
+	}
+	
 	/************************************** Partie securité ****************************************/
 	/************************************** Partie securité ****************************************/
 	/************************************** Partie securité ****************************************/
 	
-	
-	@RequestMapping(value="/Login")
+	/*@RequestMapping(value="/Login")
 	public String seconnecter(){
-		return "Login";	}
+		return "Login";	}*/
 	
 	
 	
 	
 }
-	
-	
-
 
 

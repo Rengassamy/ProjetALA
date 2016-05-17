@@ -164,6 +164,7 @@
 				<td><b>Adresse</b></td>
 				<td><b>telephone</b></td>
 				<td><b>email</b></td>
+				<td><b>Operation</b></td>
 			</tr>
 			<c:forEach items="${EntityClient}" var="c">
 				<tr>
@@ -175,6 +176,16 @@
 					<td>${c.adresse}</td>
 					<td>${c.tel}</td>
 					<td>${c.mail}</td>
+					<td><div class="btn-group">
+  <button type="button" class="btn btn-primary">Operation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="">Modifier</a></li>
+    <li><a href="deleteclient?idClient=${c.idPersonne}">Supprimer</a></li>
+  </ul>
+</div></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -195,7 +206,7 @@
 				<td><b>Adresse</b></td>
 				<td><b>telephone</b></td>
 				<td><b>email</b></td>
-
+                <td><b>Operation</b></td>
 			</tr>
 			<c:forEach items="${EntityEmployer}" var="e">
 				<tr>
@@ -206,9 +217,21 @@
 					<td>${e.dateNaissance}</td>
 					<td>${e.adresse}</td>
 					<td>${e.tel}</td>
-					<td>${e.mail}</td>
-				</tr>
+					<td>${e.mail}</td>	
+				    <td><div class="btn-group">
+  <button type="button" class="btn btn-primary">Operation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="">Modifier</a></li>
+    <li><a href="deleteemployer?idEmployer=${e.idPersonne}">Supprimer</a></li>
+  </ul>
+</div></td>
+			</tr>
 			</c:forEach>
+			
+
 		</table>
 	</div>
 
@@ -226,7 +249,10 @@
 
 
 
-
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
 </body>

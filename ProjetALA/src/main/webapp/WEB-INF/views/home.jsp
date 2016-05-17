@@ -7,6 +7,9 @@
 <title>Home</title>
 </head>
 <body>
+
+	<!-- ------------------Barre de naviguation------------------ -->
+
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -25,16 +28,27 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="GestionReservation">Reservation</a></li>
-					<li class="dropdown"><a href="GestionChambre" class="dropdown-toggle"
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Chambres<span class="caret"></span></a>
+						aria-expanded="false">Reservation <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="GestionChambre">Gestion des chambres</a></li>
+							<li><a href="GestionChambre">Chambre</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="getdispochambre">Dispo des chambres</a></li>
+							<li><a href="GestionProduit">Produit</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="GestionReservation">Reservation</a></li>
 						</ul></li>
-					<li><a href="GestionFacture">Facture</a></li>
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Paiement <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="GestionDevis">Devis</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="GestionFacture">Facture</a></li>
+						</ul></li>
+
 					<li class="dropdown"><a href="GestionClient" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Personne <span class="caret"></span></a>
@@ -62,6 +76,8 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+
+	<!-- ------------------Carousselle------------------ -->
 	<div class="page-header">
 		<h1>
 			Welcome to Hotel ALA <small>Where happiness exists</small>
@@ -81,19 +97,20 @@
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
 				<img
-					src="http://www.golftravel.nl/images/items/faohihi_exterior3.jpg"
+					src="http://www.litorehotel.com/web/en/images/placeholders/1920x1200-0.jpg"
 					alt="hotel">
 				<div class="carousel-caption"></div>
 			</div>
 			<div class="item">
 				<img
-					src="http://www.avenuedesvoyages.fr/webmag/wp-content/uploads/2012/09/27654281-H1-lobby-046_121.jpg"
+				
+					src="http://www.golftravel.nl/images/items/faohihi_exterior3.jpg"
 					alt="chambre">
 				<div class="carousel-caption"></div>
 			</div>
 			<div class="item">
-				<img
-					src="http://www.villagelecciemurta.com/img/presentation/piscine-leccie-murta.jpg"
+				<img				
+					src="http://www.avenuedesvoyages.fr/webmag/wp-content/uploads/2012/09/27654281-H1-lobby-046_121.jpg"
 					alt="chambre">
 				<div class="carousel-caption"></div>
 			</div>

@@ -32,6 +32,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;
 import com.ProjetALA.Employer.Employer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @SuppressWarnings("serial")
 @Entity
@@ -91,9 +93,11 @@ public class Reservation implements Serializable{
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	@JsonIgnore
 	public List<Chambre> getListchambre() {
 		return listchambre;
 	}
+	@JsonSetter
 	public void setListchambre(List<Chambre> listchambre) {
 		this.listchambre = listchambre;
 	}

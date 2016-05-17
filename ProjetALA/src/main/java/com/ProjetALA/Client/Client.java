@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
 @DiscriminatorValue("Client")
@@ -47,7 +48,7 @@ public class Client extends Personne {
 	public List<Reservation> getTabReservation() {
 		return tabReservation;
 	}
-
+	@JsonSetter
 	public void setTabReservation(List<Reservation> tabReservation) {
 		this.tabReservation = tabReservation;
 	}

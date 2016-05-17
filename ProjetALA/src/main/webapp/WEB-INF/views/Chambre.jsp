@@ -116,7 +116,7 @@
 			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headingTwo">
 				<div class="panel-body">
-					<f:form class="form-inline" action="insertchambre" method="get"
+					<f:form class="form-inline" action="insertchambre" method="post"
 						modelAttribute="model">
 						<div class="form-group">
 							<label for="Numero">Numéro</label>

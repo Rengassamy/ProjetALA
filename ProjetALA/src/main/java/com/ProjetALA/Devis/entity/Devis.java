@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 
 import com.ProjetALA.Produit.entity.Produit;
 import com.ProjetALA.Reservation.Reservation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /*
 AUTEUR: Mfoulou Lory
@@ -49,11 +51,11 @@ public class Devis implements Serializable {
 	public void setIdDevis(Long idDevis) {
 		this.idDevis = idDevis;
 	}
-
+	@JsonIgnore
 	public List<Produit> getListProduit() {
 		return listProduit;
 	}
-
+	@JsonSetter
 	public void setListProduit(List<Produit> listProduit) {
 		this.listProduit = listProduit;
 	}
