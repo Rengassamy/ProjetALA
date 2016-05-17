@@ -57,6 +57,41 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
+	</nav>
+	<h1>Consultation des disponibilités de l'hotel</h1>
+					<form class="form-inline" action="getdispochambre" method="get">
+						<label for="datedeb">Date début</label> <input type="text"
+							class="form-control" id="datedeb" name="datedeb"
+							placeholder="2000-01-01"></input> <label for="datefin">Date
+							fin</label> <input type="text" class="form-control" id="datefin"
+							name="datefin" placeholder="2000-01-01"></input> <label
+							for="nbrepers">Nombre de personne</label> <input type="number"
+							class="form-control" id="nbrepers" name="nbrepers"></input> <input
+							type="submit" class="btn btn-success" value="Rechercher" /> <span
+							class="exception">${exc.exception }</span>
+					</form>
+					<!-- Affichage du résultat -->
+					<h2>Chambre(s) disponible(s)</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<th class="success">Identifiant</th>
+							<th class="success">Numéro</th>
+							<th class="success">Description</th>
+							<th class="success">Capacité</th>
+							<th class="success">Prix</th>
+							<c:forEach items="${EntityChambre2}" var="ch">
+								<tr>
+									<td>${ch.idChambre}</td>
+									<td>${ch.numchambre}</td>
+									<td>${ch.description}</td>
+									<td>${ch.capacite}</td>
+									<td>${ch.prix}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+
+
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>

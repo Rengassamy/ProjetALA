@@ -34,9 +34,9 @@ public class ImplClientMetier implements InterfClientMetier {
 	}
 
 	@Override
-	public void deleteClient(Client c) {
+	public void deleteClient(Long idClient ) {
 		// TODO Auto-generated method stub
-		daoclient.deleteClient(c);
+		daoclient.deleteClient(idClient);
 	}
 
 	@Override

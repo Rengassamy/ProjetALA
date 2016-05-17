@@ -32,8 +32,8 @@ public class ImplEmployerMetier implements InterfEmployerMetier {
 	}
 
 	@Override
-	public void deleteEmployer(Employer e) {
-		daoemployer.deleteEmployer(e);
+	public void deleteEmployer(Long idEmployer) {
+		daoemployer.deleteEmployer(idEmployer);
 	}
 
 	@Override

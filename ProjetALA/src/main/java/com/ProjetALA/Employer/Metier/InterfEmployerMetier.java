@@ -17,7 +17,7 @@ public interface InterfEmployerMetier {
 	public void AddEmployer(Employer e);
 
 	/* supprimer un employer */
-	public void deleteEmployer(Employer e);
+	public void deleteEmployer(Long idEmployer);
 
 	/* consulter la liste d'employer */
 	public List<Employer> getListofEmployer();

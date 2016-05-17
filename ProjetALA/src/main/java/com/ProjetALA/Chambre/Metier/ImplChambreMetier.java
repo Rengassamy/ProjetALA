@@ -1,4 +1,5 @@
 package com.ProjetALA.Chambre.Metier;
+
 /*Auteur: Arnaud MARY
  * nom Projet: ProjetALA
  *date : 03/05/2016
@@ -25,8 +26,7 @@ import com.ProjetALA.Reservation.Reservation;
 @Transactional
 public class ImplChambreMetier implements IChambreMetier {
 
-	
-	private final Logger LOG=Logger.getLogger("ImplChambreMetier");
+	private final Logger LOG = Logger.getLogger("ImplChambreMetier");
 	// DAO Chambre : declaration + setter
 	private IChambreDAO daochambre;
 
@@ -63,31 +63,40 @@ public class ImplChambreMetier implements IChambreMetier {
 
 	@Override
 	public List<Chambre> getdispo(Date deb, Date fin, Integer nbrepers) throws Exception{
-		if (deb.getTime()>fin.getTime()) throw new Exception("La date de fin doit être supérieure à la date de début");
-		List<Chambre> listchambreok = new ArrayList<Chambre>();
-		
+		if (deb.getTime() > fin.getTime())
+			throw new Exception("La date de fin doit être supérieure à la date de début");
+		List<Chambre> listchok = new ArrayList<Chambre>();
+		Long ddeb = deb.getTime();
+		Long dfin = fin.getTime();
+		System.out.println("Date deb : "+ddeb);
+		System.out.println("Date fin : "+dfin);
 		for (Chambre ch : daochambre.getListChambre()) {
-			String Chevauchement ="Non";
-			for (Reservation	r : ch.getListresa()) {
-				if ((r.getDatedebut().getTime() < deb.getTime() && r.getDatefin().getTime()> deb.getTime())
-						|| (r.getDatedebut().getTime() <fin.getTime() && r.getDatefin().getTime()>fin.getTime())){
-						Chevauchement = "Oui";
-						break;
-				}
+			Boolean chevauchement = false;
+			for (Reservation r : ch.getListresa()) {
+				Long rdeb = r.getDatedebut().getTime();
+				Long rfin = r.getDatefin().getTime();
+				System.out.println("Date deb resa : "+rdeb);
+				System.out.println("Date fin resa : "+rfin);
+				if ((rdeb <= ddeb && rfin >= ddeb)
+						|| (rdeb <= dfin && rfin >= dfin)){
+					System.out.println("Chevauchement trouvé");
+					chevauchement = true;
+							break;	
+						}
 			}
-			if (Chevauchement == "Non"){
-			listchambreok.add(ch);
-			}
+			System.out.println("Valeur booléen : "+chevauchement);
+			if (chevauchement.booleanValue()==false) {
+				listchok.add(ch);
+			}	
+		}
+		Integer capa =0;
+		for (Chambre c : listchok) {
+			capa =capa + c.getCapacite();
+		}
+		if (nbrepers > capa){
+			throw new Exception("L'hotel ne peut pas accueilir ce nombre de personnes aux dates demandées");
 		} 
-		
-		Integer capacitehotel = 0;
-		for (Chambre c : listchambreok) {
-			capacitehotel = capacitehotel + c.getCapacite();
-		}
-		if (capacitehotel < nbrepers){
-			throw new Exception("L'hotel ne peut accueillir le nombre de personnes demandé");
-		}
-		return listchambreok;
+		System.out.println("Nbre chambres : "+listchok.size());
+		return listchok;
 	}
-
 }

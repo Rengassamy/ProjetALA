@@ -28,21 +28,29 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="GestionReservation">Reservation<span
-							class="sr-only">(current)</span></a></li>
-					<li><a href="GestionChambre">Chambre</a></li>
-					<li><a href="GestionFacture">Facture</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Personne <span class="caret"></span></a>
+					<li><a href="GestionReservation">Reservation</a></li>
+					<li class="dropdown"><a href="GestionChambre"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">Chambres<span
+							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Employe</a></li>
+							<li><a href="GestionChambre">Gestion des chambres</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#">Client</a></li>
+							<li><a href="getdispochambre">Dispo des chambres</a></li>
+						</ul></li>
+					<li><a href="GestionFacture">Facture</a></li>
+					<li class="dropdown"><a href="GestionClient"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">Personne <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="GestionClient">Employer</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="GestionClient">Client</a></li>
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
+					<li><a href="https://docs.oracle.com/javase/7/docs/api/">Help</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -75,8 +83,8 @@
 						<td>${r.datedebut}</td>
 						<td>${r.datefin}</td>
 						<td>${r.etatresa}</td>
-						<td>${r.client}</td>
-						<td>${r.employe}</td>
+						<td>${r.client.nomPersonne}</td>
+						<td>${r.employe.nomPersonne}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -86,29 +94,25 @@
 		<h1>Ajout d'une réservation</h1>
 		<form class="form-inline" action="insertreservation" method="get">
 			<div class="form-group">
-				<label for="DateDebut">Date de Début</label>
-				<input type="Date" class="form-control" id="datedebut"
-					name="datedebut" placeholder="01/01/2016"></input>
-				<label for="Date fin">Date de fin</label>
-				<input type="Date" class="form-control" id="datefin"
-					name="datefin" placeholder="01/01/2016"></input>
-				<label for="Etat">Etat</label>
+				<label for="DateDebut">Date de Début</label> <input type="Date"
+					class="form-control" id="datedebut" name="datedebut"></input> 
+					<label for="Date fin">Date
+					de fin</label> <input type="Date" class="form-control" id="datefin"
+					name="datefin" ></input> <label for="Etat">Etat</label>
 				<input type="text" class="form-control" id="etatresa"
-					name="etatresa" placeholder="A valider"></input>
-				<label for="idClient">Nom du client</label> <select
-					id="select" name="idClient">
+					name="etatresa" placeholder="A valider"></input> <label
+					for="idClient">Nom du client</label> <select id="select"
+					name="idClient">
 					<c:forEach items="${EntityClient}" var="cl">
 						<option value="${cl.idPersonne}">${cl.nomPersonne}</option>
 					</c:forEach>
-				</select>
-				<label for="idEmploye">Nom de l'employé</label> <select
-					id="select" name="idEmploye">
+				</select> <label for="idEmploye">Nom de l'employé</label> <select id="select"
+					name="idEmploye">
 					<c:forEach items="${EntityEmploye}" var="e">
 						<option value="${e.idPersonne}">${e.nomPersonne}</option>
 					</c:forEach>
-				</select>
-				<label for="idchambre">Numéro de la chambre</label>
-				<select id="select" name="idChambre">
+				</select> <label for="idchambre">Numéro de la chambre</label> <select
+					id="select" name="idChambre">
 					<c:forEach items="${EntityChambre}" var="c">
 						<option value="${c.idChambre}">${c.numchambre}</option>
 					</c:forEach>
@@ -142,18 +146,20 @@
 				<th class="info">Date de début</th>
 				<th class="info">Date de fin</th>
 				<th class="info">Etat</th>
+				<th class="info">Client</th>
 				<c:forEach items="${EntityReservationbyCli}" var="r">
 					<tr>
 						<td>${r.idReservation}</td>
 						<td>${r.datedebut}</td>
 						<td>${r.datefin}</td>
 						<td>${r.etatresa}</td>
+						<td>${r.client.nomPersonne}</td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
-<div>
+	<div>
 		<h1>Affichage des réservation d'un employe</h1>
 		<form action="getresabyemploye" method="get">
 			<select id="select" name="idEmploye">
@@ -168,7 +174,35 @@
 				<th class="info">Date de début</th>
 				<th class="info">Date de fin</th>
 				<th class="info">Etat</th>
+				<th class="info">Client</th>
 				<c:forEach items="${EntityReservationbyEmp}" var="r">
+					<tr>
+						<td>${r.idReservation}</td>
+						<td>${r.datedebut}</td>
+						<td>${r.datefin}</td>
+						<td>${r.etatresa}</td>
+						<td>${r.client.nomPersonne}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+	<div>
+		<h1>Affichage des réservations d'une chambre</h1>
+		<form action="getresabychambre" method="get">
+			<select id="select" name="idChambre">
+				<c:forEach items="${EntityChambre}" var="ch">
+					<option value="${ch.idChambre}">${ch.numchambre}</option>
+				</c:forEach>
+			</select> <input type="submit" value="Rechercher" />
+		</form>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<th class="info">Identifiant</th>
+				<th class="info">Date de début</th>
+				<th class="info">Date de fin</th>
+				<th class="info">Etat</th>
+				<c:forEach items="${EntityReservationbyCha}" var="r">
 					<tr>
 						<td>${r.idReservation}</td>
 						<td>${r.datedebut}</td>

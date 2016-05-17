@@ -15,9 +15,10 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ProjetALA.Reservation.Reservation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /*Auteur: Arnaud MARY
  * nom Projet: ProjetALA
@@ -39,7 +40,7 @@ public class Chambre implements Serializable{
 	private Long idChambre;
 	@NotBlank
 	private String numchambre;
-	@NotNull
+	@NotNull(message="La capacité doit être indiquée")
 	private Integer capacite;
 	@NotNull
 	private Double prix;
@@ -84,9 +85,11 @@ public class Chambre implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@JsonIgnore
 	public List<Reservation> getListresa() {
 		return listresa;
 	}
+	@JsonSetter
 	public void setListresa(List<Reservation> listresa) {
 		this.listresa = listresa;
 	}

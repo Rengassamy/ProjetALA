@@ -11,7 +11,7 @@ public interface InterfClientDao {
 	public void AjouterClient(Client c);
 	
 	/*supprimer un client*/
-	public void deleteClient(Client c);
+	public void deleteClient(Long idClient);
 	
 	/*consulter la liste de client*/
 	public List<Client>getListofClient();

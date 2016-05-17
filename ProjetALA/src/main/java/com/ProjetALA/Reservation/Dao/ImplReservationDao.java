@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ProjetALA.Chambre.Chambre;
 import com.ProjetALA.Client.Client;
 import com.ProjetALA.Employer.Employer;
-import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
 @Transactional
 public class ImplReservationDao implements IReservationDao {
@@ -52,7 +51,10 @@ public class ImplReservationDao implements IReservationDao {
 		c.getTabReservation().add(r);
 		for (Chambre cha : listChambre) {
 			cha.getListresa().add(r);
+			em.merge(cha);
 		}
+		em.merge(e);
+		em.merge(c);
 		return r;
 	}
 	@Override

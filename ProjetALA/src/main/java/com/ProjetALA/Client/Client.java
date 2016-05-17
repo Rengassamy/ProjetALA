@@ -15,10 +15,12 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import com.ProjetALA.Personne.Personne;
 import com.ProjetALA.Reservation.Reservation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue("Client")
@@ -41,6 +43,7 @@ public class Client extends Personne {
 	}
 
 	/*************** getterETsetter **************/
+	@JsonIgnore
 	public List<Reservation> getTabReservation() {
 		return tabReservation;
 	}

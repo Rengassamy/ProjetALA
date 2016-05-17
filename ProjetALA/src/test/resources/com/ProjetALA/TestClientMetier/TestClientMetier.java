@@ -56,7 +56,7 @@ public class TestClientMetier {
 
 	@Test
 	public void testDeleteClient() {
-		metier.deleteClient(c1);
+		metier.deleteClient(1L);
 		assertNull(c1.getIdPersonne());
 	}
 

@@ -42,7 +42,7 @@ public class TestEmployerMetier {
 
 	@Test
 	public void testDeleteEmployer() {
-		metier.deleteEmployer(e1);
+		metier.deleteEmployer(1L);
 		assertNull(e1.getIdPersonne());
 	}
 

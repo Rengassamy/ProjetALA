@@ -20,8 +20,9 @@ public class ImplClientDao implements InterfClientDao {
 	}
 
 	@Override
-	public void deleteClient(Client c) {
+	public void deleteClient(Long idClient) {
 		// TODO Auto-generated method stub
+		Client c = em.find(Client.class, idClient);
 		em.remove(c);
 	}
 

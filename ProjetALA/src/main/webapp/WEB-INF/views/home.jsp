@@ -26,19 +26,26 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="GestionReservation">Reservation</a></li>
-					<li><a href="GestionChambre">Chambre</a></li>
+					<li class="dropdown"><a href="GestionChambre" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Chambres<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="GestionChambre">Gestion des chambres</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="getdispochambre">Dispo des chambres</a></li>
+						</ul></li>
 					<li><a href="GestionFacture">Facture</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					<li class="dropdown"><a href="GestionClient" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Personne <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Employe</a></li>
+							<li><a href="GestionClient">Employer</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#">Client</a></li>
+							<li><a href="GestionClient">Client</a></li>
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
+					<li><a href="https://docs.oracle.com/javase/7/docs/api/">Help</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Dropdown <span class="caret"></span></a>

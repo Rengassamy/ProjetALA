@@ -24,9 +24,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ProjetALA.Chambre.Chambre;
@@ -42,9 +42,11 @@ public class Reservation implements Serializable{
 	private Long idReservation;
 //	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
 	private Date datedebut;
 //	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
 	private Date datefin;
 //	@NotNull
 	private String etatresa;

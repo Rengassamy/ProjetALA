@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+
 import com.ProjetALA.Employer.Employer;
 
 
@@ -20,8 +21,8 @@ public class ImplEmployerDao implements InterfEmployerDao {
 	}
 
 	@Override
-	public void deleteEmployer(Employer e) {
-		// TODO Auto-generated method stub
+	public void deleteEmployer(Long idEmployer) {
+		Employer e = em.find(Employer.class, idEmployer);
 		em.remove(e);
 	}
 

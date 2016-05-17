@@ -144,16 +144,16 @@ public class HomeController {
 	@RequestMapping(value="/getdispochambre", method= RequestMethod.GET)
 	public String getdispochambre(Model model, Date datedeb, Date datefin, Integer nbrepers){
 		try {
-/*		   SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
+     	    /*SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
 			Date Ddeb = sf.parse(datedeb);
 			Date Dfin = sf.parse(datefin);*/
-			model.addAttribute("DispoChambre", ChambreMetier.getdispo(datedeb, datefin, nbrepers));
+			model.addAttribute("EntityChambre2", ChambreMetier.getdispo(datedeb, datefin, nbrepers));
 		} catch (Exception e) {
 			Chambre C = new Chambre();
 			C.setException(e.getMessage());
 			model.addAttribute("exc", C);
 		}
-		return "redirect:GestionChambre";
+		return "GestionChambre";
 	}
 	/* Partie Facture */
 	@RequestMapping(value = "/GestionFacture", method = RequestMethod.GET)
@@ -219,8 +219,25 @@ public class HomeController {
 	@RequestMapping(value="/deleteemployer", method = RequestMethod.GET)
 	public String deleteemployer(Model model, Long idEmployer){
 		EmployeMetier.deleteEmployer(idEmployer);
-		model.addAttribute("EntityEmployer", EmployeMetier.getListofEmployer());
+		model.addAttribute("supEmployer", EmployeMetier.getListofEmployer());
 		return "redirect:GestionEmployer";
 	}
 
+	/************************************** Partie securité ****************************************/
+	/************************************** Partie securité ****************************************/
+	/************************************** Partie securité ****************************************/
+	
+	
+	@RequestMapping(value="/Login")
+	public String seconnecter(){
+		return "Login";	}
+	
+	
+	
+	
 }
+	
+	
+
+
+

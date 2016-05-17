@@ -12,6 +12,7 @@ import java.util.List;
 
 
 
+
 import com.ProjetALA.Client.Client;
 
 public interface InterfClientMetier {
@@ -20,7 +21,7 @@ public interface InterfClientMetier {
 	public void AjouterClient(Client c);
 
 	/* supprimer un client */
-	public void deleteClient(Client c);
+	public void deleteClient(Long idClient);
 
 	/* consulter la liste de client */
 	public List<Client> getListofClient();
